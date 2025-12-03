@@ -2,7 +2,7 @@
 
 ## Dataset
 
-O data set contém 1,600,000 tweets extraido utilizando a api do twitter. Os tweets foram classificados como 0 (negativo) a 4 (positivo). O dataset contém 6 campos que são o alvo como integer, ids como integer, date como date, flag como string, user como string e text como string. Esses 6 campos são mostrados abaixo.
+Foi usado um data set público contém 1,600,000 tweets extraido utilizando a api do twitter. Os tweets foram classificados como 0 (negativo) a 4 (positivo). O dataset contém 6 campos que são o alvo como integer, ids como integer, date como date, flag como string, user como string e text como string. Esses 6 campos são mostrados abaixo.
 
 - alvo: A polaridade do tweet (0 - negativo, 2 - neutro, 4 - positivo)
 - ids: O ID do tweet.
