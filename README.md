@@ -17,12 +17,12 @@ As amostras positivas e negativas são iguais. A distribuição do conjunto de d
 
 # Pré-processamento
 
-## Número de Letras
+## Quantidade de Letras
 
 Apresentamos a frequência e a frequência relativa das letras em tweets completos. Por fim, aplicamos um teste qui-quadrado para verificar se a distribuição das letras nos tweets é semelhante à observada em textos em inglês.
 ![letterfreq](imgs/2.png)
 
-Obtivemos o valor p (p) igual a 0, o que implica que a frequência das letras não segue a mesma distribuição que observamos nos testes em inglês, embora a correlação de Pearson seja muito alta (~96,7%).
+Obtivemos o valor p (p) igual a 0, o que implica que a frequência das letras não segue a mesma distribuição que observamos nos testes em inglês.
 | | Frequency | Expected |
 |---------- |:-------------: |------: |
 | frequency | 1.0 | 0.967421 |
@@ -30,7 +30,7 @@ Obtivemos o valor p (p) igual a 0, o que implica que a frequência das letras n�
 
 Contamos o número de caracteres de cada tweet e analisamos o conjunto de dados considerando o número máximo de caracteres, o número mínimo de caracteres, a média da coluna de caracteres e seu desvio padrão. Nosso tweet mais longo tem 189 caracteres, o mais curto tem 1 caractere e a média do comprimento de todos os tweets é de 42,78 caracteres. O desvio padrão do comprimento de todos os tweets é de 24,16 caracteres.
 
-## Número de Caracteres
+## Quantidade de Caracteres
 
 Contamos o número de palavras em cada tweet e analisamos o conjunto de dados considerando o número máximo de palavras, o número mínimo de palavras, a média da coluna de número de palavras e seu desvio padrão. Nosso tweet mais longo tem 50 palavras, o mais curto tem 1 palavra e a média do comprimento de todos os tweets é 7,24. O desvio padrão do comprimento de todos os tweets é 4,03.
 
@@ -51,12 +51,6 @@ Contamos o número de palavras em cada tweet e analisamos o conjunto de dados co
 
 ![a](imgs/6.png)
 ![a](imgs/7.png)
-
-## GloVe: Vetores Globais para Representação de Palavras
-
-Podemos treinar o embedding nós mesmos. No entanto, essa abordagem pode levar muito tempo. Portanto, usamos a técnica de aprendizado por transferência e o GloVe: Vetores Globais para Representação de Palavras.
-O algoritmo Vetores Globais para Representação de Palavras, ou GloVe, é uma extensão do método word2vec para aprendizado eficiente de vetores de palavras, desenvolvido por Pennington et al. em Stanford. É um algoritmo de aprendizado não supervisionado para obter representações vetoriais de palavras. O treinamento é realizado com base em estatísticas agregadas de coocorrência global de palavras de um corpus, e as representações resultantes exibem subestruturas lineares interessantes do espaço vetorial de palavras.
-Baixamos o GloVe. Em seguida, inicializamos um índice de embedding com 400.000 vetores de palavras e uma matriz de embedding.
 
 ## Gráfico de Dispersão
 
@@ -92,71 +86,37 @@ De acordo com esses resultados, pode-se interpretar que ambos os gráficos, o do
 e o do número de palavras, são assimétricos.
 Após a contagem do número de palavras usadas nos tweets, o uso das palavras é analisado. Como as stopwords (palavras irrelevantes) são geralmente as palavras mais usadas nos textos e podem nos impedir de obter os resultados corretos, elas são calculadas filtrando as stopwords. Além disso, as palavras mais comuns para rótulos positivos e negativos são separadas. Em seguida, um gráfico de dispersão é obtido usando alguns métodos de extração de características. O gráfico mostra a correlação entre as palavras.
 
-# Análise Preditiva
-
-Para experimentos de classificação/regressão, a porcentagem do conjunto de teste foi definida como
-20%. Seis modelos diferentes foram aplicados: CNN Modelo-1, CNN Modelo-2, LSTM
-Modelo-1, LSTM Modelo-2, Naive Bayes Modelo-1 e Naive Bayes Modelo-2. Abaixo,
-são apresentados a precisão, a revocação, a pontuação F1 e a acurácia dos modelos.
-
-## Classificação/Regressão
-
-- Modelo CNN 1: Conv1D = 64, Dense = 512, Dense = 512, Tamanho do Lote 1024
-- Modelo CNN 2: Conv1D = 64, Dense = 512, Dense = 512, Tamanho do Lote 512
-- Modelo LSTM 1: Tamanho do Lote 1024
-- Modelo LSTM 2: Tamanho do Lote 512
-- Modelo Naive Bayes Multinomial 1: Vetorizador de Contagem
-- Modelo Naive Bayes Multinomial 1: TF-IDF
-
-![a](imgs/9.png)
-![a](imgs/10.png)
-![a](imgs/11.png)
-
-## Curvas ROC
-
-Após determinar as métricas de avaliação, as curvas ROC dos modelos são
-construídas. Os valores de AUC também são calculados e exibidos na parte inferior de cada gráfico.
-![a](imgs/12.png)
-![a](imgs/13.png)
-
 ## Matriz de Confusão
 
 As matrizes de confusão dos 6 modelos usados ​​para treinar os dados, incluindo o modelo de melhor
 desempenho, LSTM-1, são as seguintes:
 
-![a](imgs/14.png)
-![a](imgs/15.png)
 ![a](imgs/16.png)
 
 ## Análise de Significância Estatística
 
-De acordo com a acurácia, P, R, F1 e AUC, nosso modelo de melhor desempenho é o LSTM
-modelo 1 com tamanho de lote de 1024 e acurácia de 0,789, e o concorrente mais próximo do
-modelo LSTM 1 é o modelo CNN 1 com acurácia de 0,781. O Naive Bayes Multinomial com
-tf-idf é o algoritmo de pior desempenho entre eles, com acurácia de 0,758.
+O modelo com melhor desempenho é o LSTM 1, que obteve acurácia de 0,789 usando tamanho de lote 1024. O segundo melhor é o CNN 1, com acurácia de 0,781. Já o pior resultado foi do Naive Bayes Multinomial com tf-idf, que alcançou acurácia de 0,758.
 
 ![a](imgs/17.png)
 
 ## Resultados da Análise Preditiva
 
-Nosso conjunto de dados bruto possui características desnecessárias para o nosso propósito. Seu primeiro valor de entropia
-foi 41,08. Em seguida, removemos as colunas desnecessárias, excluímos as linhas vazias
-e obtivemos um valor de entropia de 14,73. Após esse pré-processamento,
-podemos facilmente observar uma mudança significativa nos valores de entropia.
+Primeiro, nosso conjunto de dados tinha muitas informações que não eram úteis. A incerteza inicial era 41,08. Depois de remover colunas desnecessárias e excluir linhas vazias, a incerteza caiu para 14,73, mostrando uma grande melhoria após o pré-processamento.
 
-Após todos os seis experimentos, podemos ver que diferentes LSTM e CNN nos fornecem
-taxas de precisão muito próximas após o treinamento. Embora as diferenças sejam realmente pequenas,
-o Modelo LSTM-1 obteve o melhor resultado e os modelos Naive Bayes tiveram um desempenho ligeiramente
-pior.
+Após os seis experimentos, vimos que os modelos LSTM e CNN tiveram acurácias muito parecidas. Mesmo assim, o LSTM-1 foi o melhor, enquanto os modelos Naive Bayes tiveram um desempenho um pouco pior.
 
-Os modelos Naive Bayes têm as melhores durações de tempo de treinamento. Eles têm uma velocidade muito boa
-em comparação com os modelos LSTM e CNN. Os modelos LSTM-1, LSTM-2 e
-CNN-1 têm tempos de treinamento próximos, pois cada época leva de 10 a 13 minutos para
-esses modelos. Embora a alteração do tamanho do lote no LSTM não tenha apresentado uma diferença significativa nos resultados, o modelo CNN-2 tem um tempo de treinamento melhor, de cerca de 7 a 8 minutos por época. Além disso, sua precisão é muito próxima à dos demais.
+Em compensação, os Naive Bayes são os mais rápidos para treinar, bem mais velozes do que LSTM e CNN. Os modelos LSTM-1, LSTM-2 e CNN-1 levam de 10 a 13 minutos por época, enquanto o CNN-2 é mais rápido, demorando 7 a 8 minutos, com acurácia parecida.
 
-O modelo LSTM-1 tem uma taxa de precisão de 78,9% com um tamanho de lote de 1024 e o modelo LSTM-2 tem uma taxa de precisão de 78,6% com um tamanho de lote de 512. O modelo CNN-1 tem uma taxa de precisão de 78,2% com um tamanho de lote de 1024 e o modelo CNN-2 tem uma taxa de precisão de 77,2% com um tamanho de lote de 512. Ambos os algoritmos têm tempos de treinamento melhores com um tamanho de lote de 512, são melhores do que seus modelos com tamanho de lote de 1024 e suas taxas de precisão são muito próximas.
+As acurácias ficaram assim:
 
-Como resultado, podemos dizer que os modelos LSTM e CNN com tamanho de lote de 1024 são melhores em termos de taxa de precisão. No entanto, os modelos com tamanho de lote de 512 têm taxas de precisão próximas com tempos de treinamento melhores.
-Para as taxas de precisão dos modelos Naive Bayes, há uma pequena diferença de cerca de
-1,5%. Como resultado, podemos dizer que o Naive Bayes com o método CountVectorizer
-apresenta melhores resultados do que o Naive Bayes com o método TF-IDF.
+LSTM-1: 78,9% (batch 1024)
+
+LSTM-2: 78,6% (batch 512)
+
+CNN-1: 78,2% (batch 1024)
+
+CNN-2: 77,2% (batch 512)
+
+Modelos com batch 512 são mais rápidos, enquanto os de 1024 têm acurácia um pouco maior.
+
+No caso do Naive Bayes, a diferença entre os modelos foi pequena (cerca de 1,5%). Mesmo assim, o Naive Bayes com CountVectorizer teve desempenho melhor do que o Naive Bayes com TF-IDF.
