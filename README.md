@@ -17,8 +17,6 @@ As amostras positivas e negativas são iguais. A distribuição do conjunto de d
 
 # Pré-processamento
 
-## Gráfico/Figuras do Atributo
-
 ## Número de Letras
 
 Apresentamos a frequência e a frequência relativa das letras em tweets completos. Por fim, aplicamos um teste qui-quadrado para verificar se a distribuição das letras nos tweets é semelhante à observada em textos em inglês.
