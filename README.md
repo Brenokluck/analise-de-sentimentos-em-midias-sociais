@@ -55,10 +55,10 @@ Contamos o número de palavras em cada tweet e analisamos o conjunto de dados co
 ## Gráfico de Dispersão
 
 Utilizamos métodos de extração de características, saco de palavras e incorporação de palavras.
-O saco de palavras com TF-IDF é uma maneira comum e simples de extração de características
-O saco de palavras é um modelo de representação de dados textuais e o TF-IDF é um método de cálculo
+O saco de palavras com TF é uma maneira comum e simples de extração de características
+O saco de palavras é um modelo de representação de dados textuais e o TF é um método de cálculo
 para pontuar a importância das palavras em um documento.
-Após aplicar o saco de palavras com TF-IDF, criamos o gráfico de dispersão de acordo com
+Após aplicar o saco de palavras com TF, criamos o gráfico de dispersão de acordo com
 esses resultados.
 
 ### Gráfico de dispersão que mostra a correlação de palavras no corpus: vermelho indica palavras negativas, azul indica palavras positivas.
@@ -86,16 +86,34 @@ De acordo com esses resultados, pode-se interpretar que ambos os gráficos, o do
 e o do número de palavras, são assimétricos.
 Após a contagem do número de palavras usadas nos tweets, o uso das palavras é analisado. Como as stopwords (palavras irrelevantes) são geralmente as palavras mais usadas nos textos e podem nos impedir de obter os resultados corretos, elas são calculadas filtrando as stopwords. Além disso, as palavras mais comuns para rótulos positivos e negativos são separadas. Em seguida, um gráfico de dispersão é obtido usando alguns métodos de extração de características. O gráfico mostra a correlação entre as palavras.
 
+## Análise Preditiva
+
+Para experimentos de classificação/regressão, a porcentagem do conjunto de teste foi definida em 20%. Seis modelos diferentes foram aplicados: CNN Modelo 1, CNN Modelo 2, LSTM Modelo 1, LSTM Modelo 2, Naive Bayes Modelo 1 e Naive Bayes Modelo 2. Abaixo, são apresentados a precisão, a revocação, a pontuação F1 e a acurácia dos modelos.
+
+## TF
+
+O valor tf–idf (abreviação do inglês term frequency–inverse document frequency, que significa frequência do termo–inverso da frequência nos documentos), é uma medida estatística que tem o intuito de indicar a importância de uma palavra de um documento em relação a uma coleção de documentos ou em um corpus linguístico.
+
+## CNN
+
+Neural Network/Rede Neural Convolucional mo contexto de inteligência artificial e aprendizagem de máquina, uma rede neural convolucional (CNN do inglês Convolutional Neural network ou ConvNet) é uma classe de rede neural artificial do tipo feed-forward, que vem sendo aplicada com sucesso no processamento e análise de imagens digitais.
+
+Uma CNN usa uma variação de perceptrons multicamada desenvolvidos de modo a demandar o mínimo pré-processamento possível.
+
+## LSTM
+
+Long-Short Term Memory/Memória de Longo Curto Prazo é uma rede neural recorrente, projetada para lidar com o problema do gradiente desvanecente
+
 ## Matriz de Confusão
 
 As matrizes de confusão dos 6 modelos usados ​​para treinar os dados, incluindo o modelo de melhor
-desempenho, LSTM-1, são as seguintes:
+desempenho, LSTM, são as seguintes:
 
 ![a](imgs/16.png)
 
 ## Análise de Significância Estatística
 
-O modelo com melhor desempenho é o LSTM 1, que obteve acurácia de 0,789 usando tamanho de lote 1024. O segundo melhor é o CNN 1, com acurácia de 0,781. Já o pior resultado foi do Naive Bayes Multinomial com tf-idf, que alcançou acurácia de 0,758.
+O modelo com melhor desempenho é o LSTM, que obteve acurácia de 0,789 usando tamanho de lote 1024. O segundo melhor é o CNN , com acurácia de 0,781. Já o pior resultado foi do TF, que alcançou acurácia de 0,758.
 
 ![a](imgs/17.png)
 
@@ -103,20 +121,20 @@ O modelo com melhor desempenho é o LSTM 1, que obteve acurácia de 0,789 usando
 
 Primeiro, nosso conjunto de dados tinha muitas informações que não eram úteis. A incerteza inicial era 41,08. Depois de remover colunas desnecessárias e excluir linhas vazias, a incerteza caiu para 14,73, mostrando uma grande melhoria após o pré-processamento.
 
-Após os seis experimentos, vimos que os modelos LSTM e CNN tiveram acurácias muito parecidas. Mesmo assim, o LSTM-1 foi o melhor, enquanto os modelos Naive Bayes tiveram um desempenho um pouco pior.
+Após os seis experimentos, vimos que os modelos LSTM e CNN tiveram acurácias muito parecidas. Mesmo assim, o LSTM foi o melhor, enquanto os modelos Naive Bayes tiveram um desempenho um pouco pior.
 
-Em compensação, os Naive Bayes são os mais rápidos para treinar, bem mais velozes do que LSTM e CNN. Os modelos LSTM-1, LSTM-2 e CNN-1 levam de 10 a 13 minutos por época, enquanto o CNN-2 é mais rápido, demorando 7 a 8 minutos, com acurácia parecida.
+Em compensação, os Naive Bayes são os mais rápidos para treinar, bem mais velozes do que LSTM e CNN. Os modelos LSTM e CNN levam de 10 a 13 minutos por época, enquanto o CNN é mais rápido, demorando 7 a 8 minutos, com acurácia parecida.
 
 As acurácias ficaram assim:
 
-LSTM-1: 78,9% (batch 1024)
+LSTM: 78,9% (batch 1024)
 
-LSTM-2: 78,6% (batch 512)
+LSTM: 78,6% (batch 512)
 
-CNN-1: 78,2% (batch 1024)
+CNN: 78,2% (batch 1024)
 
-CNN-2: 77,2% (batch 512)
+CNN: 77,2% (batch 512)
 
 Modelos com batch 512 são mais rápidos, enquanto os de 1024 têm acurácia um pouco maior.
 
-No caso do Naive Bayes, a diferença entre os modelos foi pequena (cerca de 1,5%). Mesmo assim, o Naive Bayes com CountVectorizer teve desempenho melhor do que o Naive Bayes com TF-IDF.
+No caso do Naive Bayes, a diferença entre os modelos foi pequena (cerca de 1,5%). Mesmo assim, o Naive Bayes com CountVectorizer teve desempenho melhor do que o Naive Bayes com TF.
